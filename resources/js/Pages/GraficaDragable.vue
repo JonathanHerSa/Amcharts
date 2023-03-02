@@ -22,6 +22,6 @@ const key = ref(0);
         <!-- <GraficaBarras :datos="datos" /> -->
         <!-- <Grafico :datos="datos" :key="key" /> -->
         <!-- <GraficaDona /> -->
-        <Anotaciones />
+        <Anotaciones :datos="datos" />
     </div>
 </template>

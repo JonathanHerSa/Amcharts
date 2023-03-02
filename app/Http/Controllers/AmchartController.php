@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Events\UpdateChart;
 use App\Models\Amchart;
+use App\Models\Anotaciones;
 use App\Models\Chartgrid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class AmchartController extends Controller
 {
     public function index()
     {
-        $datos = Chartgrid::all();
+        $datos = Anotaciones::all();
         return Inertia::render('GraficaDragable', ['datos' => $datos]);
     }
 
@@ -55,6 +57,11 @@ class AmchartController extends Controller
     }
     public function notes(Request $request)
     {
-        dd($request->ValorA);
+        $ant = Anotaciones::where('id', $request->id)->first();
+        if ($ant) {
+            $ant->update(['maker' => $request->maker,]);
+        } else {
+            Anotaciones::create(['maker' => $request->maker,]);
+        }
     }
 }
